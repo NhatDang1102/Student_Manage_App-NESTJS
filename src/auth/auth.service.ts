@@ -25,6 +25,10 @@ export class AuthService {
               throw new BadRequestException('User already exists');
          }
 
+         const tempUserExists = await this.tempUsersRepository.findOne({ where: { email: dto.email } });
+         if (tempUserExists) {
+            throw new BadRequestException('User already exists in temp users');
+         }
          const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
          const hashedPassword = await bcrypt.hash(dto.password, 10);

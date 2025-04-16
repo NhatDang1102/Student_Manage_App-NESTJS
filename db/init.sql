@@ -26,3 +26,14 @@ CREATE TABLE IF NOT EXISTS students (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE SET NULL
 );
+
+CREATE TABLE IF NOT EXISTS temp_users (
+  id CHAR(36) PRIMARY KEY,
+  email VARCHAR(100) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  name VARCHAR(100),
+  role ENUM('student', 'lecturer') NOT NULL,
+  otp_code VARCHAR(6),
+  otp_expired_at TIMESTAMP,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
