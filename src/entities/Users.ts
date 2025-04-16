@@ -1,10 +1,10 @@
-import { Column, Entity, Index, OneToMany } from "typeorm";
+import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Students } from "./Students";
 
 @Index("email", ["email"], { unique: true })
 @Entity("users", { schema: "studentdb" })
 export class Users {
-  @Column("char", { primary: true, name: "id", length: 36 })
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column("varchar", { name: "email", unique: true, length: 100 })

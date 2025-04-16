@@ -14,7 +14,7 @@ export class Classes {
     name: "status",
     nullable: true,
     enum: ["open", "closed"],
-    default: () => "'open'",
+    default: 'open',
   })
   status: "open" | "closed" | null;
 
