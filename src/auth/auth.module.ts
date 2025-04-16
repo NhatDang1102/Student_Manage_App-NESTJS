@@ -5,22 +5,20 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from '../entities/Users';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
-
+import { TempUsers } from '../entities/TempUsers';
+import { MailService } from './mail.service';
 @Module({
   
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: ['.env'],
-    }),
-    TypeOrmModule.forFeature([Users]),
+    ConfigModule,
+    TypeOrmModule.forFeature([Users, TempUsers]),
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1h' }
     })
   ],
   controllers: [AuthController],
-  providers: [AuthService]
+  providers: [AuthService, MailService]
   
 })
 export class AuthModule {}

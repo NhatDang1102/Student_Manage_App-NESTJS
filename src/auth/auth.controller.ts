@@ -14,4 +14,8 @@ export class AuthController {
         return this.authService.login(data);
     }
 
+    @Post('verify-otp')
+    verifyOtp(@Body() data: { email: string; otp: string }) {
+        return this.authService.verifyOtp(data);
+    }
 }
